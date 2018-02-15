@@ -331,6 +331,7 @@ BlockController.prototype.formatTimestamp = function(date) {
 
 //xd modified
 BlockController.prototype.getBlockReward = function(height) {
+  //marked premine
   var premineAmount = 6300000000;
   var premineHeight = premineAmount / 50000;
 
@@ -338,6 +339,7 @@ BlockController.prototype.getBlockReward = function(height) {
     return ;
   }
 
+  //markd
   var halvings = Math.floor( (height+premineHeight) / 210000);
   // Force block reward to zero when right shift is undefined.
   if (halvings >= 64) {
@@ -345,7 +347,13 @@ BlockController.prototype.getBlockReward = function(height) {
   }
 
   // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
-  var subsidy = new BN(50000 * 1e8);
+  //begin michael 20180215
+  var tmpReward = 50000;
+  if(height >= 10000) {
+    tmpReward = 1500;
+  }
+  //end michael 20180215
+  var subsidy = new BN(tmpReward * 1e8);
   subsidy = subsidy.shrn(halvings);
 
   return parseInt(subsidy.toString(10));
