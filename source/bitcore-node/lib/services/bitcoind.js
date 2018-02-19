@@ -2019,6 +2019,7 @@ Bitcoin.prototype.getDetailedTransaction = function(txid, callback) {
         console.log("result  :------------------------------------------------------");
         console.log(result);
 
+        self.confirmations = result.confirmations;
 
         addInputsToTx(tx, result);
         addOutputsToTx(tx, result);
