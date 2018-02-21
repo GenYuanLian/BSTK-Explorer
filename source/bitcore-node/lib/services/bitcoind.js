@@ -1763,6 +1763,9 @@ Bitcoin.prototype.getBlockHeader = function(blockArg, callback) {
           bits: result.bits,
           difficulty: result.difficulty
         };
+
+        //michael
+        self.difficulty = result.difficulty;
         done(null, header);
       });
     }, callback);

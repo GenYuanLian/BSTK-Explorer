@@ -114,7 +114,11 @@ BlockController.prototype._normalizePrevHash = function(hash) {
   }
 };
 
+//michael laoliu 20180221
 BlockController.prototype.transformBlock = function(block, info) {
+  //michael laoliu
+  var self = this;
+
   var blockObj = block.toObject();
   var transactionIds = blockObj.transactions.map(function(tx) {
     return tx.hash;
@@ -129,7 +133,7 @@ BlockController.prototype.transformBlock = function(block, info) {
     time: blockObj.header.time,
     nonce: blockObj.header.nonce,
     bits: blockObj.header.bits.toString(16),
-    difficulty: block.header.getDifficulty(),
+    difficulty: self.node.services.bitcoind.difficulty,
     chainwork: info.chainWork,
     confirmations: info.confirmations,
     previousblockhash: this._normalizePrevHash(blockObj.header.prevHash),
